@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using DataPersist;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,8 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Domain.Value>>> Get(){
+        public async Task<ActionResult<IEnumerable<Domain.Value>>> Get()
+        {
             var values = await context.Values.ToListAsync();
             return Ok(values);
         }
