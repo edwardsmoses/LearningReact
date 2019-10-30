@@ -1,50 +1,43 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
+import { Header, Icon, List } from "semantic-ui-react";
 
-
-class App extends Component{
-
+class App extends Component {
   state = {
     values: []
-  }
+  };
 
-  componentDidMount(){
-    axios.get('http://localhost:5000/api/ReactValues').then((response) =>{
-    
-    console.log(response);
+  componentDidMount() {
+    axios.get("http://localhost:5000/api/ReactValues").then(response => {
+      console.log(response);
 
-    this.setState({
+      this.setState({
         values: response.data
       });
-
-
     });
-    
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-         
-         <img src={logo} className="App-logo" alt='Logo'></img>
+      <div>
+        <Header as="h2">
+          <Icon name="users" />
+          <Header.Content>Learning React</Header.Content>
+        </Header>
 
-         <ul>
-           {
-             this.state.values.map((value:any) => (
-               <li key={value.id}>{value.id} - {value.name}</li>
-             ))
-           }
-         </ul>
-        
-        </header>
+        <List>
+          {this.state.values.map((value: any) => (
+            <List.Item key={value.id}>
+              <List.Icon name="tag" />
+              <List.Content>{value.name}</List.Content>
+            </List.Item>
+          ))}
+        </List>
       </div>
-      
     );
   }
 }
-
 
 export default App;
